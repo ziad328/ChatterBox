@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="transparent">#00FFFFFF</color>
     <color name="green500">#004E44</color>
     <color name="green200">#029B87</color>
     <color name="green300">#24786D</color>
+    <color name="red">#FF0000</color>
     <color name="gray">#AFB0B1</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="primaryColor">@color/green200</color>
+    <color name="mtrl_textinput_default_box_stroke_color">@color/gray</color>
 </resources>
