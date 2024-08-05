@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Chatter Box</string>
+    <string name="app_name">ChatterBox</string>
+    <string name="onboarding_text1">Connect Friends<b>\neasily &amp; quickly</b></string>
+    <string name="onboarding_text_2">Our chat app is the perfect way to stay \nconnected with friends and family.</string>
+    <string name="existing_account_log_in">Existing account?<b> Log in</b></string>
+    <string name="sign_up_withn_mail_onboarding_btn">Sign up withn mail</string>
 </resources>
