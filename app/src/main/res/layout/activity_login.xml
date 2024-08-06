@@ -112,8 +112,8 @@
             android:textColorHint="@color/gray"
             app:Error="@{vm.emailError}"
             app:boxStrokeColor="@color/primaryColor"
-            app:boxStrokeErrorColor="@color/red"
             app:cursorColor="@color/primaryColor"
+            app:cursorErrorColor="@color/design_default_color_error"
             app:hintTextColor="@color/primaryColor"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout_OR">
 
@@ -139,8 +139,8 @@
             android:textColorHint="@color/gray"
             app:Error="@{vm.passwordError}"
             app:boxStrokeColor="@color/primaryColor"
-            app:boxStrokeErrorColor="@color/red"
             app:cursorColor="@color/primaryColor"
+            app:cursorErrorColor="@color/design_default_color_error"
             app:hintTextColor="@color/primaryColor"
             app:layout_constraintTop_toBottomOf="@+id/emailLogin_layout">
 
@@ -200,6 +200,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
+            android:onClick="@{()->vm.navigateToRegisterActivity()}"
             android:text="@string/don_t_have_an_account_sign_up"
             android:textColor="@color/primaryColor"
             android:textSize="14sp"

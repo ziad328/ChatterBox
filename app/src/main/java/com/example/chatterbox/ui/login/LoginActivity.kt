@@ -1,5 +1,6 @@
 package com.example.chatterbox.ui.login
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -9,6 +10,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.chatterbox.R
 import com.example.chatterbox.databinding.ActivityLoginBinding
+import com.example.chatterbox.ui.home.HomeActivity
+import com.example.chatterbox.ui.register.RegisterActivity
 import com.example.chatterbox.utils.showAlertDialog
 
 class LoginActivity : AppCompatActivity() {
@@ -49,6 +52,28 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun handleEvents(loginViewEvents: LoginViewEvents?) {
-        TODO("Not yet implemented")
+        when (loginViewEvents) {
+            LoginViewEvents.NavigateToHome -> {
+                navigateToHomeActivity()
+            }
+
+            LoginViewEvents.NavigateToRegister -> {
+                navigateToRegisterActivity()
+            }
+
+            else -> {}
+        }
+    }
+
+    private fun navigateToRegisterActivity() {
+        val intent = Intent(this, RegisterActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    private fun navigateToHomeActivity() {
+        val intent = Intent(this, HomeActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

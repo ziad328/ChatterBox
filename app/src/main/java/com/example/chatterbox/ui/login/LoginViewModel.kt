@@ -28,6 +28,7 @@ class LoginViewModel : ViewModel() {
                 if (task.isSuccessful) {
                     isLoading.value = false
                     messageLiveData.postValue(Message(task.result?.user?.uid))
+                    navigateToHomeActivity()
                     // insertUserToFirestore(task.result.user?.uid)
                 } else {
                     isLoading.value = false
@@ -35,6 +36,15 @@ class LoginViewModel : ViewModel() {
                 }
             }
     }
+
+    private fun navigateToHomeActivity() {
+        events.postValue(LoginViewEvents.NavigateToHome)
+    }
+
+    fun navigateToRegisterActivity() {
+        events.postValue(LoginViewEvents.NavigateToRegister)
+    }
+
 
     private fun insertUserToFirestore(uid: String?) {
         TODO("Not yet implemented")

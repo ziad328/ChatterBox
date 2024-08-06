@@ -143,6 +143,7 @@
                 android:layout_height="60dp"
                 android:layout_margin="16dp"
                 android:background="@drawable/onboarding_btn"
+                android:onClick="@{()->vm.navigateToRegister()}"
                 android:paddingVertical="16dp">
 
 
@@ -177,6 +178,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2.5"
                 android:fontFamily="@font/poppins_regular"
+                android:onClick="@{()->vm.navigateToLogin()}"
                 android:text="@string/existing_account_log_in"
                 android:textColor="@color/white"
                 android:textSize="14sp" />

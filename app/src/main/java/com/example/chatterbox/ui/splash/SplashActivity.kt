@@ -10,7 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.chatterbox.R
 import com.example.chatterbox.databinding.ActivitySplashBinding
-import com.example.chatterbox.ui.register.RegisterActivity
+import com.example.chatterbox.ui.onboarding.OnboardingActivity
 
 class SplashActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivitySplashBinding
@@ -32,7 +32,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun startOnboardingActivity() {
-        val intent = Intent(this, RegisterActivity::class.java)
+        val intent = Intent(this, OnboardingActivity::class.java)
         startActivity(intent)
         finish()
     }

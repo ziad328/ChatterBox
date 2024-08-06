@@ -112,11 +112,8 @@
             android:textColorHint="@color/gray"
             app:Error="@{vm.userNameError}"
             app:boxStrokeColor="@color/primaryColor"
-            app:boxStrokeErrorColor="@color/red"
             app:cursorColor="@color/primaryColor"
-            app:cursorErrorColor="@color/red"
-            app:errorIconTint="@color/red"
-            app:errorTextColor="@color/red"
+            app:cursorErrorColor="@color/design_default_color_error"
             app:hintTextColor="@color/primaryColor"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout_OR">
 
@@ -142,11 +139,8 @@
             android:textColorHint="@color/gray"
             app:Error="@{vm.emailError}"
             app:boxStrokeColor="@color/primaryColor"
-            app:boxStrokeErrorColor="@color/red"
             app:cursorColor="@color/primaryColor"
-            app:cursorErrorColor="@color/red"
-            app:errorIconTint="@color/red"
-            app:errorTextColor="@color/red"
+            app:cursorErrorColor="@color/design_default_color_error"
             app:hintTextColor="@color/primaryColor"
             app:layout_constraintTop_toBottomOf="@+id/username_layout">
 
@@ -172,11 +166,8 @@
             android:textColorHint="@color/gray"
             app:Error="@{vm.passwordError}"
             app:boxStrokeColor="@color/primaryColor"
-            app:boxStrokeErrorColor="@color/red"
             app:cursorColor="@color/primaryColor"
-            app:cursorErrorColor="@color/red"
-            app:errorIconTint="@color/red"
-            app:errorTextColor="@color/red"
+            app:cursorErrorColor="@color/design_default_color_error"
             app:hintTextColor="@color/primaryColor"
             app:layout_constraintTop_toBottomOf="@+id/email_layout">
 
@@ -202,11 +193,8 @@
             android:textColorHint="@color/gray"
             app:Error="@{vm.passwordConfirmationError}"
             app:boxStrokeColor="@color/primaryColor"
-            app:boxStrokeErrorColor="@color/red"
             app:cursorColor="@color/primaryColor"
-            app:cursorErrorColor="@color/red"
-            app:errorIconTint="@color/red"
-            app:errorTextColor="@color/red"
+            app:cursorErrorColor="@color/design_default_color_error"
             app:hintTextColor="@color/primaryColor"
             app:layout_constraintTop_toBottomOf="@+id/password_layout">
 
@@ -267,6 +255,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
+            android:onClick="@{()->vm.navigateToLogin()}"
             android:text="@string/do_you_have_an_account_sign_in"
             android:textColor="@color/primaryColor"
             android:textSize="14sp"
