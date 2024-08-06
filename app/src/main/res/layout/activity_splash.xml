@@ -6,7 +6,7 @@
     style="@style/Theme.ChatterBox.AppBackground"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".splash.SplashActivity">
+    tools:context=".ui.splash.SplashActivity">
 
     <ImageView
         android:id="@+id/logo_img"

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "711072215436",
+    "project_id": "chatterbox-ziad32",
+    "storage_bucket": "chatterbox-ziad32.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:711072215436:android:e7b6cbcacad0e2771b26a9",
+        "android_client_info": {
+          "package_name": "com.example.chatterbox"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMdiPLKEqYSALm6eZXE-C3tqCPOm8b888"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
