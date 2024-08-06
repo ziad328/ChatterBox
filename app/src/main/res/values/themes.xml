@@ -1,15 +1,31 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.ChatterBox" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
+        <item name="android:colorPrimary">@color/green200</item>
     </style>
-    <style name="Theme.ChatterBox.SplashBackground" parent="Theme.ChatterBox">
-        <item name="color"> @color/white</item>
+
+    <style name="Theme.ChatterBox.AppBackground" parent="Theme.ChatterBox">
+        <item name="color">@color/white</item>
     </style>
 
     <style name="Theme.ChatterBox.SplashLogoText" parent="Theme.ChatterBox">
-        <item name="font"> @font/poppins_black</item>
-        <item name="android:textColor"> @color/black</item>
-        <item name="android:textSize">20dp</item>
+        <item name="fontFamily">@font/poppins_black</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="Theme.ChatterBox.LoginText" parent="Theme.ChatterBox">
+        <item name="fontFamily">@font/poppins_regular</item>
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Theme.ChatterBox.NormalText" parent="Theme.ChatterBox">
+        <item name="fontFamily">@font/roboto_thin</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">16sp</item>
     </style>
 </resources>

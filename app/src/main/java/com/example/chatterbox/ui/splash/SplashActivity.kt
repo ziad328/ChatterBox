@@ -1,4 +1,4 @@
-package com.example.chatterbox.splash
+package com.example.chatterbox.ui.splash
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,7 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.chatterbox.R
 import com.example.chatterbox.databinding.ActivitySplashBinding
-import com.example.chatterbox.home.HomeActivity
+import com.example.chatterbox.ui.onboarding.OnboardingActivity
 
 class SplashActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivitySplashBinding
@@ -26,13 +26,13 @@ class SplashActivity : AppCompatActivity() {
         }
         Handler(Looper.getMainLooper())
             .postDelayed({
-                startHomeActivity()
-            }, 2000)
+                startOnboardingActivity()
+            }, 1500)
 
     }
 
-    private fun startHomeActivity() {
-        val intent = Intent(this, HomeActivity::class.java)
+    private fun startOnboardingActivity() {
+        val intent = Intent(this, OnboardingActivity::class.java)
         startActivity(intent)
         finish()
     }

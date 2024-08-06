@@ -1,4 +1,4 @@
-package com.example.chatterbox.home
+package com.example.chatterbox.ui.home
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
