@@ -2,6 +2,9 @@ package com.example.chatterbox.ui.register
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.chatterbox.firestore.dao.UsersDao
+import com.example.chatterbox.firestore.model.User
+import com.example.chatterbox.sessionProvider.SessionProvider
 import com.example.chatterbox.utils.Message
 import com.example.chatterbox.utils.SingleLiveEvent
 import com.google.firebase.auth.ktx.auth
@@ -29,10 +32,7 @@ class RegisterViewModel : ViewModel() {
         auth.createUserWithEmailAndPassword(email.value!!, password.value!!)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    isLoading.value = false
-                    messageLiveData.postValue(Message(task.result?.user?.uid))
-                    navigateToHomeActivity()
-                    // insertUserToFirestore(task.result.user?.uid)
+                    insertUserToFirestore(task.result.user?.uid)
                 } else {
                     isLoading.value = false
                     messageLiveData.postValue(Message(task.exception?.localizedMessage))
@@ -47,11 +47,22 @@ class RegisterViewModel : ViewModel() {
     fun navigateToLogin() {
         events.postValue(RegisterViewEvents.NavigateToLogin)
     }
-    
-    private fun insertUserToFirestore(uid: String?) {
-        TODO("Not yet implemented")
-    }
 
+    private fun insertUserToFirestore(uid: String?) {
+        val user = User(id = uid, username = userName.value, email = email.value)
+        UsersDao.createUser(user) { task ->
+            isLoading.value = false
+            if (task.isSuccessful) {
+                //saving user
+                SessionProvider.user = user
+                //navigate to home screen
+                navigateToHomeActivity()
+            } else {
+                messageLiveData.postValue(Message(task.exception?.localizedMessage))
+            }
+
+        }
+    }
 
     private fun valid(): Boolean {
         var isValid = true
