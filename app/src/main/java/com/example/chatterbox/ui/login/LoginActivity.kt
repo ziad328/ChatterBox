@@ -2,18 +2,22 @@ package com.example.chatterbox.ui.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.chatterbox.R
 import com.example.chatterbox.databinding.ActivityLoginBinding
 import com.example.chatterbox.ui.home.HomeActivity
 import com.example.chatterbox.ui.register.RegisterActivity
 import com.example.chatterbox.utils.showAlertDialog
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivityLoginBinding
     private lateinit var viewModel: LoginViewModel
@@ -30,11 +34,21 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == LoginViewModel.RC_SIGN_IN) {
+            data?.let {
+                viewModel.handleSignInResult(it)
+            }
+        }
+    }
+
     private fun initViews() {
         viewBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         viewBinding.lifecycleOwner = this
         viewBinding.vm = viewModel
+        viewModel.configureGoogleSignIn()
     }
 
     private fun subscribeToLiveData() {
@@ -48,7 +62,23 @@ class LoginActivity : AppCompatActivity() {
                 isCancellable = message.isCancellable
             )
         }
+        viewModel.signInResult.observe(this, Observer { result ->
+            result.onSuccess { user ->
+                if (user != null) {
+                    Toast.makeText(this, "Sign in successful", Toast.LENGTH_SHORT).show()
+                    navigateToHomeActivity()
+                    finish()
+                } else {
+                    Toast.makeText(this, "Sign in failed: User is null", Toast.LENGTH_SHORT).show()
+                }
+            }.onFailure {
+                Toast.makeText(this, "Sign in failed: ${it.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
         viewModel.events.observe(this, ::handleEvents)
+        viewModel.googleSignInClicked.observe(this) {
+            startActivityForResult(it, LoginViewModel.RC_SIGN_IN)
+        }
     }
 
     private fun handleEvents(loginViewEvents: LoginViewEvents?) {
