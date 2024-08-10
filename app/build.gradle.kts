@@ -62,4 +62,5 @@ dependencies {
     implementation(libs.play.services.auth)
     implementation(libs.dagger.hilt)
     kapt(libs.dagger.hilt.compiler)
+    implementation(libs.androidx.fragment.ktx)
 }

@@ -7,7 +7,7 @@
 
         <variable
             name="vm"
-            type="com.example.chatterbox.ui.onboarding.OnboardingViewModel" />
+            type="com.example.chatterbox.ui.authentication.onboarding.OnboardingViewModel" />
     </data>
 
 
@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/onboarding"
-        tools:context=".ui.onboarding.OnboardingActivity">
+        tools:context=".ui.authentication.onboarding.OnboardingActivity">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -83,32 +83,11 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/linearLayout_loginWith"
+            <FrameLayout
+                android:id="@+id/social_media_onboarding_fr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:weightSum="3">
-
-                <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/twitter_bb_logo" />
-
-                <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_marginHorizontal="24dp"
-                    android:onClick="@{()-> vm.onGoogleSignInClick()}"
-                    android:src="@drawable/google_bb_logo" />
-
-                <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/apple_bb_logo" />
-
-            </LinearLayout>
+                android:layout_weight="1" />
 
             <LinearLayout
                 android:id="@+id/linearLayout_OR"

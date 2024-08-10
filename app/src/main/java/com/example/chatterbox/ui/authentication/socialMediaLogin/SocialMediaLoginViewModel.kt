@@ -1,4 +1,4 @@
-package com.example.chatterbox.ui.onboarding
+package com.example.chatterbox.ui.authentication.socialMediaLogin
 
 import android.content.Context
 import android.content.Intent
@@ -6,7 +6,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.chatterbox.R
-import com.example.chatterbox.utils.SingleLiveEvent
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -19,13 +18,12 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class OnboardingViewModel @Inject constructor(private val appContext: Context) : ViewModel() {
-    val events = SingleLiveEvent<OnboardingViewEvents>()
+class SocialMediaLoginViewModel @Inject constructor(private val appContext: Context) : ViewModel() {
 
-    private val auth = Firebase.auth
     private val _signInResult = MutableLiveData<Result<FirebaseUser?>>()
     val signInResult: LiveData<Result<FirebaseUser?>> get() = _signInResult
     val googleSignInClicked = MutableLiveData<Intent>()
+    private val auth = Firebase.auth
 
     private lateinit var googleSignInClient: GoogleSignInClient
 
@@ -65,13 +63,4 @@ class OnboardingViewModel @Inject constructor(private val appContext: Context) :
                 }
             }
     }
-
-    fun navigateToLogin() {
-        events.postValue(OnboardingViewEvents.NavigateToLogin)
-    }
-
-    fun navigateToRegister() {
-        events.postValue(OnboardingViewEvents.NavigateToRegister)
-    }
-
 }
