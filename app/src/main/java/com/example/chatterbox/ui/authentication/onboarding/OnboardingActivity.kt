@@ -1,4 +1,4 @@
-package com.example.chatterbox.ui.onboarding
+package com.example.chatterbox.ui.authentication.onboarding
 
 import android.content.Intent
 import android.os.Bundle
@@ -10,9 +10,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.chatterbox.R
 import com.example.chatterbox.databinding.ActivityOnboardingBinding
-import com.example.chatterbox.ui.login.LoginActivity
-import com.example.chatterbox.ui.register.RegisterActivity
+import com.example.chatterbox.ui.authentication.login.LoginActivity
+import com.example.chatterbox.ui.authentication.register.RegisterActivity
+import com.example.chatterbox.ui.authentication.socialMediaLogin.SocialMediaLoginFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class OnboardingActivity : AppCompatActivity() {
     private lateinit var viewBinding: ActivityOnboardingBinding
     private lateinit var viewModel: OnboardingViewModel
@@ -34,6 +37,10 @@ class OnboardingActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this)[OnboardingViewModel::class.java]
         viewBinding.lifecycleOwner = this
         viewBinding.vm = viewModel
+        val socialMediaLoginFragment = SocialMediaLoginFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.social_media_onboarding_fr, socialMediaLoginFragment)
+            .commit()
     }
 
     private fun subscribeToLiveData() {

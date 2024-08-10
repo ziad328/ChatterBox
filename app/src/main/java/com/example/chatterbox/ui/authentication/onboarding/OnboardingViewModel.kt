@@ -1,4 +1,4 @@
-package com.example.chatterbox.ui.onboarding
+package com.example.chatterbox.ui.authentication.onboarding
 
 import androidx.lifecycle.ViewModel
 import com.example.chatterbox.utils.SingleLiveEvent

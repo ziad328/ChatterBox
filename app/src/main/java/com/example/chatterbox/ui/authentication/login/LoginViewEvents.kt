@@ -1,4 +1,4 @@
-package com.example.chatterbox.ui.login
+package com.example.chatterbox.ui.authentication.login
 
 enum class LoginViewEvents {
     NavigateToHome,

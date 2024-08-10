@@ -1,4 +1,4 @@
-package com.example.chatterbox.ui.login
+package com.example.chatterbox.ui.authentication.register
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,14 +9,17 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.chatterbox.R
-import com.example.chatterbox.databinding.ActivityLoginBinding
+import com.example.chatterbox.databinding.ActivityRegisterBinding
+import com.example.chatterbox.ui.authentication.login.LoginActivity
+import com.example.chatterbox.ui.authentication.socialMediaLogin.SocialMediaLoginFragment
 import com.example.chatterbox.ui.home.HomeActivity
-import com.example.chatterbox.ui.register.RegisterActivity
 import com.example.chatterbox.utils.showAlertDialog
+import dagger.hilt.android.AndroidEntryPoint
 
-class LoginActivity : AppCompatActivity() {
-    private lateinit var viewBinding: ActivityLoginBinding
-    private lateinit var viewModel: LoginViewModel
+@AndroidEntryPoint
+class RegisterActivity : AppCompatActivity() {
+    private lateinit var viewBinding: ActivityRegisterBinding
+    private lateinit var viewModel: RegisterViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -31,10 +34,14 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        viewBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
-        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+        viewBinding = DataBindingUtil.setContentView(this, R.layout.activity_register)
+        viewModel = ViewModelProvider(this)[RegisterViewModel::class.java]
         viewBinding.lifecycleOwner = this
         viewBinding.vm = viewModel
+        val socialMediaLoginFragment = SocialMediaLoginFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.social_media_register_fr, socialMediaLoginFragment)
+            .commit()
     }
 
     private fun subscribeToLiveData() {
@@ -51,22 +58,24 @@ class LoginActivity : AppCompatActivity() {
         viewModel.events.observe(this, ::handleEvents)
     }
 
-    private fun handleEvents(loginViewEvents: LoginViewEvents?) {
-        when (loginViewEvents) {
-            LoginViewEvents.NavigateToHome -> {
+    private fun handleEvents(registerViewEvent: RegisterViewEvents?) {
+        when (registerViewEvent) {
+            RegisterViewEvents.NavigateToHome -> {
                 navigateToHomeActivity()
             }
 
-            LoginViewEvents.NavigateToRegister -> {
-                navigateToRegisterActivity()
+            RegisterViewEvents.NavigateToLogin -> {
+                navigateToLoginActivity()
             }
 
-            else -> {}
+            else -> {
+
+            }
         }
     }
 
-    private fun navigateToRegisterActivity() {
-        val intent = Intent(this, RegisterActivity::class.java)
+    private fun navigateToLoginActivity() {
+        val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
         finish()
     }

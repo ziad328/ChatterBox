@@ -1,12 +1,14 @@
-package com.example.chatterbox.ui.login
+package com.example.chatterbox.ui.authentication.login
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.chatterbox.firestore.dao.UsersDao
+import com.example.chatterbox.firestore.model.User
+import com.example.chatterbox.sessionProvider.SessionProvider
 import com.example.chatterbox.utils.Message
 import com.example.chatterbox.utils.SingleLiveEvent
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-
 
 class LoginViewModel : ViewModel() {
     val messageLiveData = SingleLiveEvent<Message>()
@@ -16,7 +18,6 @@ class LoginViewModel : ViewModel() {
 
     val email = MutableLiveData<String>()
     val password = MutableLiveData<String>()
-
     val emailError = MutableLiveData<String?>()
     val passwordError = MutableLiveData<String?>()
 
@@ -26,15 +27,25 @@ class LoginViewModel : ViewModel() {
         auth.signInWithEmailAndPassword(email.value!!, password.value!!)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    isLoading.value = false
-                    messageLiveData.postValue(Message(task.result?.user?.uid))
-                    navigateToHomeActivity()
-                    // insertUserToFirestore(task.result.user?.uid)
+                    getUserFromFirestore(task.result.user?.uid)
                 } else {
                     isLoading.value = false
                     messageLiveData.postValue(Message(task.exception?.localizedMessage))
                 }
             }
+    }
+
+    private fun getUserFromFirestore(uid: String?) {
+        UsersDao.getUser(uid) { task ->
+            isLoading.value = false
+            if (task.isSuccessful) {
+                val user = task.result.toObject(User::class.java)
+                SessionProvider.user = user
+                navigateToHomeActivity()
+            } else {
+                messageLiveData.postValue(Message(task.exception?.localizedMessage))
+            }
+        }
     }
 
     private fun navigateToHomeActivity() {
@@ -44,12 +55,6 @@ class LoginViewModel : ViewModel() {
     fun navigateToRegisterActivity() {
         events.postValue(LoginViewEvents.NavigateToRegister)
     }
-
-
-    private fun insertUserToFirestore(uid: String?) {
-        TODO("Not yet implemented")
-    }
-
 
     private fun valid(): Boolean {
         var isValid = true

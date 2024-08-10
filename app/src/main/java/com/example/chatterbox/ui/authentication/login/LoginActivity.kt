@@ -1,4 +1,4 @@
-package com.example.chatterbox.ui.register
+package com.example.chatterbox.ui.authentication.login
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,20 +9,22 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.example.chatterbox.R
-import com.example.chatterbox.databinding.ActivityRegisterBinding
+import com.example.chatterbox.databinding.ActivityLoginBinding
+import com.example.chatterbox.ui.authentication.register.RegisterActivity
+import com.example.chatterbox.ui.authentication.socialMediaLogin.SocialMediaLoginFragment
 import com.example.chatterbox.ui.home.HomeActivity
-import com.example.chatterbox.ui.login.LoginActivity
 import com.example.chatterbox.utils.showAlertDialog
+import dagger.hilt.android.AndroidEntryPoint
 
-class RegisterActivity : AppCompatActivity() {
-    private lateinit var viewBinding: ActivityRegisterBinding
-    private lateinit var viewModel: RegisterViewModel
+@AndroidEntryPoint
+class LoginActivity : AppCompatActivity() {
+    private lateinit var viewBinding: ActivityLoginBinding
+    private lateinit var viewModel: LoginViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         initViews()
         subscribeToLiveData()
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -31,10 +33,14 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        viewBinding = DataBindingUtil.setContentView(this, R.layout.activity_register)
-        viewModel = ViewModelProvider(this)[RegisterViewModel::class.java]
+        viewBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+        viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         viewBinding.lifecycleOwner = this
         viewBinding.vm = viewModel
+        val socialMediaLoginFragment = SocialMediaLoginFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.social_media_login_fr, socialMediaLoginFragment)
+            .commit()
     }
 
     private fun subscribeToLiveData() {
@@ -51,29 +57,27 @@ class RegisterActivity : AppCompatActivity() {
         viewModel.events.observe(this, ::handleEvents)
     }
 
-    private fun handleEvents(registerViewEvent: RegisterViewEvents?) {
-        when (registerViewEvent) {
-            RegisterViewEvents.NavigateToHome -> {
-                navigateToHome()
+    private fun handleEvents(loginViewEvents: LoginViewEvents?) {
+        when (loginViewEvents) {
+            LoginViewEvents.NavigateToHome -> {
+                navigateToHomeActivity()
             }
 
-            RegisterViewEvents.NavigateToLogin -> {
-                navigateToLogin()
+            LoginViewEvents.NavigateToRegister -> {
+                navigateToRegisterActivity()
             }
 
-            else -> {
-
-            }
+            else -> {}
         }
     }
 
-    private fun navigateToLogin() {
-        val intent = Intent(this, LoginActivity::class.java)
+    private fun navigateToRegisterActivity() {
+        val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
         finish()
     }
 
-    private fun navigateToHome() {
+    private fun navigateToHomeActivity() {
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
         finish()
