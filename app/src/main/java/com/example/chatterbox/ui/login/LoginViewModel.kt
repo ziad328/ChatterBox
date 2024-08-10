@@ -128,8 +128,4 @@ class LoginViewModel @Inject constructor(private val appContext: Context) : View
         }
         return isValid
     }
-
-    companion object {
-        const val RC_SIGN_IN = 9001
-    }
 }

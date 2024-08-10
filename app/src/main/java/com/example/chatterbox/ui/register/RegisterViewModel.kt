@@ -147,9 +147,4 @@ class RegisterViewModel @Inject constructor(private val appContext: Context) : V
         }
         return isValid
     }
-
-    companion object {
-        const val RC_SIGN_IN = 9001
-    }
-
 }

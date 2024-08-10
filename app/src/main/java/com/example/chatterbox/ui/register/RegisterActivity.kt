@@ -14,7 +14,7 @@ import com.example.chatterbox.R
 import com.example.chatterbox.databinding.ActivityRegisterBinding
 import com.example.chatterbox.ui.home.HomeActivity
 import com.example.chatterbox.ui.login.LoginActivity
-import com.example.chatterbox.ui.login.LoginViewModel
+import com.example.chatterbox.utils.SharedPref
 import com.example.chatterbox.utils.showAlertDialog
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,7 +37,7 @@ class RegisterActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == RegisterViewModel.RC_SIGN_IN) {
+        if (requestCode == SharedPref.RC_SIGN_IN) {
             data?.let {
                 viewModel.handleSignInResult(it)
             }
@@ -78,7 +78,7 @@ class RegisterActivity : AppCompatActivity() {
         })
         viewModel.events.observe(this, ::handleEvents)
         viewModel.googleSignInClicked.observe(this) {
-            startActivityForResult(it, LoginViewModel.RC_SIGN_IN)
+            startActivityForResult(it, SharedPref.RC_SIGN_IN)
         }
     }
 
